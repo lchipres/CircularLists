@@ -29,7 +29,7 @@ namespace CircularLists
             }
         }
 
-        private void Add(Base place,Base b)
+        private void Add(Base place,Base b)//Place to know when is needed to add
         {
             if (place.next == first)
             {
@@ -73,7 +73,7 @@ namespace CircularLists
 
         public Base DeleteLast()
         {
-            Base helper;
+            Base helper=first;
             if (EmptyList())
             {
                 return null;
@@ -87,44 +87,44 @@ namespace CircularLists
             }
             else
             {
-                return Delete(first);
-            }
+                if (first.next == first)
+                    first = null;
+                else
+                {
+                    while (helper.next.next != first)
+                    {
+                        helper = helper.next;//Point to the end
+                    }
 
-        }
-
-        private Base Delete(Base b)
-        {
-            Base deleted = null;
-
-            if (b.next.next == first)
-            {
-                deleted = b.next;//Before delete, know who is going to be deleted
-                b.next = first;//New relationship <3
+                    helper.next = first;//New relationship
+                }
                 numberBase--;
 
-                return deleted;//Return who was your X
+                return helper.next;
             }
-            else
-            {
-                return Delete(b.next);
-            }
+
         }
+
 
         public Base DeleteFirst()
         {
             Base deleted =first;
-
-            while (deleted.next != first)
+            if (first.next == first)
+                first = null;
+            else
             {
-                deleted = deleted.next;//Point to the end
-            }
+                while (deleted.next != first)
+                {
+                    deleted = deleted.next;//Point to the end
+                }
 
-            deleted = deleted.next;//Who was
-            first = first.next;//New relationship
+                deleted.next = first.next ;//New relationship
+                first = first.next;
+            }
             numberBase--;
 
             return deleted;
-            }
+        }
 
         public Base DeleteByName(string name)
         {
@@ -161,6 +161,7 @@ namespace CircularLists
                 }
                 b.next = helper.next;//Next of new is first
                 helper = b;//Previous is the new
+                numberBase++;
             }
             else
             {
@@ -171,6 +172,7 @@ namespace CircularLists
                 helper2 = helper.next;//Previous of the pos
                 helper.next = b;//Previous is next
                 b.next = helper2;//Next of new is previous
+                numberBase++;
             }
             
         }
@@ -185,9 +187,10 @@ namespace CircularLists
             }
             for(;_hourBegin<=_hourEnd ; )
             {
-                s += helper.ToString()+Environment.NewLine;
+
                 _hourBegin=_hourBegin.AddMinutes(Convert.ToDouble(helper.minutes));
-                helper=helper.next;
+                s += helper.ToString() +_hourBegin+ Environment.NewLine;
+                helper =helper.next;
             }
             return s;
         }

@@ -135,7 +135,7 @@
             this.dateTimeEnd.ShowUpDown = true;
             this.dateTimeEnd.Size = new System.Drawing.Size(110, 20);
             this.dateTimeEnd.TabIndex = 9;
-            this.dateTimeEnd.Value = new System.DateTime(2018, 5, 23, 20, 57, 34, 0);
+            this.dateTimeEnd.Value = new System.DateTime(2018, 5, 30, 0, 0, 0, 0);
             // 
             // label1
             // 
